@@ -59,32 +59,59 @@
 			</div>
 		</c:if>
 	</div>
-	
 	<script type="text/javascript">
 		var cri = {
-				page : 1,
-				po_num : ${post.po_num}
+			page : 1,
+			po_num : ${post.po_num}
 		}
 		$(document).on("submit", ".comment-insert-form", function(e){
 			e.preventDefault();
-			
-			var content = $(this).find("[name=content]").val();
+			var $content = $(this).find("[name=content]");
+			var content = $content.val();
+
+			//댓글 내용을 입력 안한 경우
+			if(content.length == 0){
+				alert("댓글 내용을 입력하세요.");
+				$content.focus();
+				return;
+			}
 			
 			$.ajax({
-				async : true, //비동기 : true(비동기), false(동기)
-				url : '<c:url value="/comment/insert" />', 
+				async : true,
+				url : '<c:url value="/comment/insert"/>', 
 				type : 'post', 
 				data : JSON.stringify({
 					co_po_num : cri.po_num,
-					co_content : content
+					co_content: content
 				}), 
-				contentType : "application/json; charset=utf-8", //보내는 타입
-				//dataType : "json", //받는 타입
+				contentType : "application/json; charset=utf-8",
 				success : function (data){
-					console.log(data);
+					if(data){
+						alert('댓글 등록!');
+						$content.val('');
+						getCommentList(cri);
+					}else{
+						alert('댓글 등록 실패!');
+					}
 				}
 			});
 		})
+	</script>
+	
+	<script type="text/javascript">
+		getCommentList(cri);
+		function getCommentList(cri) {
+			$.ajax({
+				async : true,
+				url : '<c:url value="/comment/list"/>', 
+				type : 'post', 
+				data : JSON.stringify(cri), 
+				contentType : "application/json; charset=utf-8",
+				success : function (data){
+					$(".comment-wrap").html(data);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

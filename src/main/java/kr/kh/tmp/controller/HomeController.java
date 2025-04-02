@@ -78,7 +78,6 @@ public class HomeController {
 		model.addAttribute("msg", "로그아웃 했습니다.");
 		return "message";
 	}
-	
 	@ResponseBody
 	@GetMapping("/ajax/sample1")
 	public Object ajaxSample1(@RequestParam String name, @RequestParam int age) {
@@ -100,13 +99,13 @@ public class HomeController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("person", person);
-		map.put("string", "HiHowAreYou");
+		map.put("string", "안녕하세요");
 		return map;
 	}
-	//@ResponseBody
+	
 	@GetMapping("/ajax/sample4")
 	public Object ajaxSample4(@RequestParam int bo_num) {
 		
-		return "redirect:/post/list?bo_num =" + bo_num;
+		return "redirect:/post/list?bo_num=" + bo_num;
 	}
 }

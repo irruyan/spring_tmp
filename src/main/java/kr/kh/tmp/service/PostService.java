@@ -10,7 +10,6 @@ import kr.kh.tmp.model.vo.MemberVO;
 import kr.kh.tmp.model.vo.PostVO;
 import kr.kh.tmp.pagination.Criteria;
 import kr.kh.tmp.pagination.PageMaker;
-import kr.kh.tmp.pagination.PostCriteria;
 
 public interface PostService {
 

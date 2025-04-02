@@ -5,13 +5,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PostCriteria extends Criteria {
+public class CommentCriteria extends Criteria {
 
-	int bo_num;
+	int po_num;
 
 	@Override
 	public String toString() {
-		return "PostCriteria [bo_num=" + bo_num + "," + super.toString() +  "]";
+		return "CommentCriteria [po_num=" + po_num + "," + super.toString() +  "]";
 	}
 	
 }

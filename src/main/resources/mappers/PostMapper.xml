@@ -25,18 +25,18 @@
 			and po_bo_num = #{cri.bo_num}
 		</if>
 		<choose>
-			 <when test="cri.type == 0">
-			 	and (po_title like concat('%', #{cri.search}, '%')
-			 		or po_content like concat('%', #{cri.search}, '%')
-			 		or po_me_id = #{cri.search})
-			 </when>
-			 <when test="cri.type == 1">
-			 	and (po_title like concat('%', #{cri.search}, '%')
-			 		or po_content like concat('%', #{cri.search}, '%'))
-			 </when>
-			 <when test="cri.type == 2">
-			 	and or po_me_id = #{cri.search}
-			 </when>
+			<when test="cri.type == 0">
+				and (po_title like concat('%', #{cri.search}, '%')
+					or po_content like concat('%', #{cri.search}, '%')
+					or po_me_id = #{cri.search})
+			</when>
+			<when test="cri.type == 1">
+				and (po_title like concat('%', #{cri.search}, '%')
+					or po_content like concat('%', #{cri.search}, '%'))
+			</when>
+			<when test="cri.type == 2">
+				and po_me_id = #{cri.search}
+			</when>
 		</choose>
 		order by po_num desc
 		limit #{cri.pageStart}, #{cri.perPageNum}
@@ -78,25 +78,24 @@
 	</select>
 	<select id="selectCountPostList" resultType="int">
 		select count(*) 
-		from post
-		join board on po_bo_num = bo_num 
+		from post 
 		where po_del = "N"
 		<if test="cri.bo_num != 0">
 			and po_bo_num = #{cri.bo_num}
 		</if>
 		<choose>
-			 <when test="cri.type == 0">
-			 	and (po_title like concat('%', #{cri.search}, '%')
-			 		or po_content like concat('%', #{cri.search}, '%')
-			 		or po_me_id = #{cri.search})
-			 </when>
-			 <when test="cri.type == 1">
-			 	and (po_title like concat('%', #{cri.search}, '%')
-			 		or po_content like concat('%', #{cri.search}, '%'))
-			 </when>
-			 <when test="cri.type == 2">
-			 	and or po_me_id = #{cri.search}
-			 </when>
+			<when test="cri.type == 0">
+				and (po_title like concat('%', #{cri.search}, '%')
+					or po_content like concat('%', #{cri.search}, '%')
+					or po_me_id = #{cri.search})
+			</when>
+			<when test="cri.type == 1">
+				and (po_title like concat('%', #{cri.search}, '%')
+					or po_content like concat('%', #{cri.search}, '%'))
+			</when>
+			<when test="cri.type == 2">
+				and po_me_id = #{cri.search}
+			</when>
 		</choose>
 	</select>
 </mapper>

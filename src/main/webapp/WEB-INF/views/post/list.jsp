@@ -56,69 +56,71 @@
 			<c:set var="prev" value="disabled" />
 		</c:if>
 		<c:url var="url" value="/post/list">
-			<c:param name="bo_num" value="${pm.cri.bo_num }" />
-			<c:param name="page" value="${pm.startPage - 1}" />
-			<c:param name="type" value="${pm.cri.type}" />
-			<c:param name="search" value="${pm.cri.search}" />
+			<c:param name="bo_num" value="${pm.cri.bo_num }"/>
+			<c:param name="page" value="${pm.startPage - 1}"/>
+			<c:param name="type" value="${pm.cri.type}"/>
+			<c:param name="search" value="${pm.cri.search}"/>
 		</c:url>
-    <li class="page-item ${prev }">
-    	<a class="page-link" href="${url }">이전</a>
-    </li>
-    <c:forEach begin="${pm.startPage }" end="${pm.endPage }" var="i">
-    	<c:set var="active" value=""/>
-    	<c:if test="${pm.cri.page == i }">
-    		<c:set var="active" value="active"/>
-    	</c:if>
-    	<c:url var="url" value="/post/list">
-			<c:param name="bo_num" value="${pm.cri.bo_num }" />
-			<c:param name="page" value="${i}" />
-			<c:param name="type" value="${pm.cri.type}" />
-			<c:param name="search" value="${pm.cri.search}" />
-		</c:url>
-	    <li class="page-item ${active }">
-	    	<a class="page-link" href="${url }">${i }</a>
+	    <li class="page-item ${prev}">
+	    	<a class="page-link" href="${url}">이전</a>
 	    </li>
-    </c:forEach>
+	    <c:forEach begin="${pm.startPage }" end="${pm.endPage}" var="i">
+	    	<c:set var="active" value=""/>
+	    	<c:if test="${pm.cri.page == i }">
+	    		<c:set var="active" value="active"/>	
+	    	</c:if>
+	    	<c:url var="url" value="/post/list">
+				<c:param name="bo_num" value="${pm.cri.bo_num }"/>
+				<c:param name="page" value="${i}"/>
+				<c:param name="type" value="${pm.cri.type}"/>
+				<c:param name="search" value="${pm.cri.search}"/>
+			</c:url>
+		    <li class="page-item ${active }">
+		    	<a class="page-link" href="${url}">${i}</a>
+		    </li>
+	    </c:forEach>
 	    <c:if test="${!pm.next }">
 			<c:set var="next" value="disabled" />
 		</c:if>
 		<c:url var="url" value="/post/list">
-			<c:param name="bo_num" value="${pm.cri.bo_num }" />
-			<c:param name="page" value="${pm.endPage + 1}" />
-			<c:param name="type" value="${pm.cri.type}" />
-			<c:param name="search" value="${pm.cri.search}" />
+			<c:param name="bo_num" value="${pm.cri.bo_num }"/>
+			<c:param name="page" value="${pm.endPage + 1}"/>
+			<c:param name="type" value="${pm.cri.type}"/>
+			<c:param name="search" value="${pm.cri.search}"/>
 		</c:url>
-    <li class="page-item ${next }">
-    	<a class="page-link" href="${url }">다음</a>
-    </li>
-  	</ul>
-  	<form action="<c:url value="/post/list"/>" class="input-group mb-3">
-  		<input type="hidden" name="bo_num" value="${pm.cri.bo_num }">
-  		<select name="type" class="form-control">
-  			<c:set var="selected" value="" />
-  			<c:if test="${pm.cri.type == 0}">
-  				<c:set var="selected" value="selected" />
-  			</c:if>
-  			<option value="0" ${selected}>전체</option>
-  			
-  			<c:set var="selected" value="" />
-  			<c:if test="${pm.cri.type == 1}">
-  				<c:set var="selected" value="selected" />
-  			</c:if>
-  			<option value="1" ${selected}>제목+내용</option>
-  			
-  			<c:set var="selected" value="" />
-  			<c:if test="${pm.cri.type == 2}">
-  				<c:set var="selected" value="selected" />
-  			</c:if>
-  			<option value="2" ${selected}>작성자</option>
-  		</select>
-  		<input type="text" class="form-control" placeholder="검색어를 입력하세요" name="search" value="${pm.cri.search}">
-  		<button type="submit" class="form-control btn btn-outline-success">검색</button>
-  	</form>
+	    <li class="page-item ${next}">
+	    	<a class="page-link" href="${url}">다음</a>
+	    </li>
+	</ul>
+	
+	<form action="<c:url value="/post/list"/>" class="input-group mb-3">
+		<input type="hidden" name="bo_num" value="${pm.cri.bo_num}">
+		<select name="type" class="form-control">
+			<c:set var="selected" value="" />
+			<c:if test="${pm.cri.type == 0 }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option value="0" ${selected}>전체</option>
+			
+			<c:set var="selected" value="" />
+			<c:if test="${pm.cri.type == 1 }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option value="1" ${selected}>제목+내용</option>
+			
+			<c:set var="selected" value="" />
+			<c:if test="${pm.cri.type == 2 }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option value="2" ${selected}>작성자</option>
+		</select>
+		<input type="text" class="form-control" placeholder="검색어를 입력하세요." name="search" value="${pm.cri.search}">
+	    <button type="submit" class="form-control btn btn-outline-success">검색</button>
+	</form>
+	
 	<div class="clearfix mb-3">
 		<a href="<c:url value="/post/insert?bo_num=${bo_num}"/>" class="btn btn-outline-success float-right">게시글 등록</a>
 	</div>
-	${pm }
+	
 </body>
 </html>

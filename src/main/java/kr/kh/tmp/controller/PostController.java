@@ -40,6 +40,7 @@ public class PostController {
 		model.addAttribute("list", list);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pm", pm);
+		
 		return "/post/list";
 	}
 	
