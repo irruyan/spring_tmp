@@ -15,7 +15,7 @@
 				<div class="comment-writer">${co.co_me_id }</div>
 				<div class="comment-content">${co.co_content }</div>
 				<div>
-					<button class="btn btn-outline-success">답글</button>
+					<button class="btn btn-outline-success btn-reply" data-num="${co.co_num }">답글</button>
 					<button class="btn btn-outline-warning">수정</button>
 					<button class="btn btn-outline-danger">삭제</button>
 				</div>
@@ -55,6 +55,16 @@
 			cri.page = $(this).data("page");
 			getCommentList(cri);
 		});
+		$(".btn-reply").click(function(e){
+			let str = `
+				<form class="comment-insert-form">
+				<textarea name="content"></textarea>
+				<button type="submit">댓글 등록</button>
+				</form>
+			
+			`;
+			$(this).parent().after(str);
+		})
 	</script>
 </body>
 </html>
