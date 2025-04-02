@@ -12,12 +12,14 @@
 	<c:if test="${list.size() != 0 }">
 		<div class="comment-list">
 			<c:forEach items="${list}" var="co">
-				<div class="comment-writer">${co.co_me_id }</div>
-				<div class="comment-content">${co.co_content }</div>
-				<div>
-					<button class="btn btn-outline-success btn-reply" data-num="${co.co_num }">답글</button>
-					<button class="btn btn-outline-warning">수정</button>
-					<button class="btn btn-outline-danger">삭제</button>
+				<div class="comment-item <c:if test="${co.co_num ne co.co_ori_num }">pl-5</c:if>">
+					<div class="comment-writer">${co.co_me_id }</div>
+					<div class="comment-content">${co.co_content }</div>
+					<div>
+						<button class="btn btn-outline-success btn-reply" data-num="${co.co_num}">답글</button>
+						<button class="btn btn-outline-warning">수정</button>
+						<button class="btn btn-outline-danger">삭제</button>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -56,12 +58,16 @@
 			getCommentList(cri);
 		});
 		$(".btn-reply").click(function(e){
+			//답글입력창이 여러개 생기는걸 방지
+			if($(this).parent().next().length != 0){
+				return;
+			}
+			let num = $(this).data("num");
 			let str = `
-				<form class="comment-insert-form">
-				<textarea name="content"></textarea>
-				<button type="submit">댓글 등록</button>
+				<form class="comment-insert-form" data-num="\${num}">
+					<textarea name="content"></textarea>
+					<button type="submit">답글 등록</button>
 				</form>
-			
 			`;
 			$(this).parent().after(str);
 		})
