@@ -16,4 +16,10 @@ public interface CommentDAO {
 
 	int selectCountCommentList(@Param("cri")Criteria cri);
 
+	CommentVO selectComment(@Param("co_num")int co_num);
+
+	boolean deleteComment(@Param("co_num")int co_num);
+
+	boolean updateComment(@Param("co")CommentVO comment);
+
 }
