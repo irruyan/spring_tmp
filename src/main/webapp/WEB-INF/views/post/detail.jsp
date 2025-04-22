@@ -41,6 +41,11 @@
 		</c:forEach>
 	</div>
 	<hr>
+	<div class="form-group d-flex justify-content-center">
+		<button class="btn btn-outline-success mr-2 btn-up" data-num="${post.po_num }" data-state="1">추천()</button>
+		<button class="btn btn-outline-danger ml-2 btn-down" data-num="${post.po_num }" data-state="-1">비추천()</button>
+	</div>
+	<hr>
 	<div class="comment-container">
 		<div class="comment-wrap">
 		
@@ -59,6 +64,27 @@
 			</div>
 		</c:if>
 	</div>
+	
+	
+	<script type="text/javascript">
+		$(".btn-up, .btn-down").click(function(e){
+			let num = $(this).data("num");
+			let state = $(this).data("state");
+			$.ajax({
+				async : true,
+				url : '<c:url value="/post/like"/>', 
+				type : 'post', 
+				data : JSON.stringify({
+					li_state : state,
+					li_po_num : num
+				}),
+				contentType : "application/json; charset=utf-8",
+				success : function (data){
+					console.log(data);
+				}
+			});
+		});
+	</script>
 	<script type="text/javascript">
 		var cri = {
 			page : 1,

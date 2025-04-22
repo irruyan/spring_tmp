@@ -108,4 +108,5 @@ public class HomeController {
 		
 		return "redirect:/post/list?bo_num=" + bo_num;
 	}
+	
 }
